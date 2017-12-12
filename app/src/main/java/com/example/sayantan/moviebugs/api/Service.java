@@ -17,10 +17,10 @@ import retrofit2.http.Query;
 public interface Service {
 
 
-    @GET("movie/popular?api_key=")
-    Call<MoviesResponse> getPopularMovies(@Query("f48e0ffb5529f75f4d1c11f966fd71e8") String apikey) ;
+    @GET("movie/popular")
+    Call<MoviesResponse> getPopularMovies(@Query("api_key") String apikey) ;
 
-    @GET("movie/top_rated?api_key=")
-    Call<MoviesResponse> getTopRatedMovies(@Query("f48e0ffb5529f75f4d1c11f966fd71e8") String apikey) ;
+    @GET("movie/top_rated")
+    Call<MoviesResponse> getTopRatedMovies(@Query("api_key") String apikey) ;
 
 }
