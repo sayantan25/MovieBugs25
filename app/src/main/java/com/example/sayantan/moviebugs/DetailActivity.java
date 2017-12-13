@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 
 //import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
+import com.example.sayantan.moviebugs.model.Movie;
 
 /**
  * Created by Sayantan on 11/30/2017.
@@ -22,6 +23,9 @@ import com.bumptech.glide.Glide;
 
     TextView nameOfMovie, plotSynopsis, userRating, releaseDate;
     ImageView imageView;
+    Movie movie;
+    String thumbnail, movieName, synopsis, rating, dateOfRelease;
+    int movie_id;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -42,14 +46,16 @@ import com.bumptech.glide.Glide;
         releaseDate = (TextView) findViewById(R.id.releasedate);
 
         Intent intentThatStartedThisActivity = getIntent();
-        if (intentThatStartedThisActivity.hasExtra("original_title")){
+        if (intentThatStartedThisActivity.hasExtra("movies")){
 
-           String thumbnail = getIntent().getExtras().getString("poster_path");
-            String movieName = getIntent().getExtras().getString("original_title");
-            String synopsis = getIntent().getExtras().getString("overview");
-            String rating = getIntent().getExtras().getString("vote_average");
-            String dateOfRelease = getIntent().getExtras().getString("release_date");
+            movie = getIntent().getParcelableExtra("movies");
 
+            thumbnail = movie.getPosterPath();
+            movieName = movie.getOriginalTitle();
+            synopsis = movie.getOverview();
+            rating = Double.toString(movie.getVoteAverage());
+            dateOfRelease = movie.getReleaseDate();
+            movie_id = movie.getId();
 
             String poster = "https://image.tmdb.org/t/p/w500" + thumbnail;
 
@@ -66,7 +72,6 @@ import com.bumptech.glide.Glide;
         }else{
             Toast.makeText(this, "No API Data", Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
